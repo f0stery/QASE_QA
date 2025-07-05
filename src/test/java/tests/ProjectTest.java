@@ -6,14 +6,15 @@ import utils.Retry;
 
 public class ProjectTest extends BaseTest{
 
-    @Test (retryAnalyzer = Retry.class)
-    public void checkCreateProject() {
+    @Test (testName = "Авторизация",enabled = false, groups = {"smoke"}, retryAnalyzer = Retry.class)
+    public void checkAuthorization() {
         loginPage.openPage();
         loginPage.login("f0rsteryo@gmail.com", "mW@7!uU?vnVf6mD");
         projectsPage.waitTillOpened();
     }
 
-    @Test (retryAnalyzer = Retry.class)
+    @Test (testName = "Проверка на создание и удаление Public проекта", groups = {"smoke"},
+            description = "Удачное создание и удаление Public проекта", retryAnalyzer = Retry.class)
     public void checkCreatePublicProject() {
         loginPage.openPage();
         loginPage.login("f0rsteryo@gmail.com", "mW@7!uU?vnVf6mD");
@@ -24,7 +25,10 @@ public class ProjectTest extends BaseTest{
         projectsPage.deleteProject("QASE");
     }
 
-    @Test (retryAnalyzer = Retry.class)
+    @Test (testName = "Проверка на создание и удаление Private проекта",
+            description = "Удачное создание и удаление Private проекта",
+            groups = {"smoke"},
+            retryAnalyzer = Retry.class)
     public void checkCreatePrivateProject() {
         loginPage.openPage();
         loginPage.login("f0rsteryo@gmail.com", "mW@7!uU?vnVf6mD");
