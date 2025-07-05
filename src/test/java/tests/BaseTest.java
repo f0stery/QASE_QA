@@ -3,6 +3,7 @@ package tests;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
@@ -32,6 +33,7 @@ public class BaseTest {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
+        options.addArguments("--headless");
 
         loginPage = new LoginPage();
         projectsPage = new ProjectsPage();
@@ -44,6 +46,8 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown() {
-        getWebDriver().quit();
+        if (getWebDriver() != null) {
+            getWebDriver().quit();
+        }
     }
 }
