@@ -14,6 +14,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      EMAIL: ${{secrets.QASE_USER_EMAIL}}
+      PASSWORD: ${{secrets.QASE_USER_PASSWORD}}
+
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -23,4 +27,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Run tests
-      run: mvn clean test
+      run: mvn clean test -Demail=$EMAIL - Dpassword=$PASSWORD

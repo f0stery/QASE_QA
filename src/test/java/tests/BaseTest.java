@@ -19,6 +19,9 @@ public class BaseTest {
     LoginPage loginPage;
     ProjectsPage projectsPage;
 
+    String email = System.getProperty("email");
+    String password = System.getProperty("password");
+
     @BeforeMethod
     public void setup() {
         Configuration.browser = "chrome";
