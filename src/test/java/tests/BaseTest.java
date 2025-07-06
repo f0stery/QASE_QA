@@ -19,8 +19,8 @@ public class BaseTest {
     LoginPage loginPage;
     ProjectsPage projectsPage;
 
-    String email = System.getProperty("email");
-    String password = System.getProperty("password");
+    String email = System.getProperty("email", PropertyReader.getProperty("email"));
+    String password = System.getProperty("password", PropertyReader.getProperty("password"));
 
     @BeforeMethod
     public void setup() {
