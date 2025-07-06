@@ -27,4 +27,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Run tests
-      run: mvn clean test -Demail=$EMAIL - Dpassword=$PASSWORD
+      run: mvn clean test -Demail=$EMAIL -Dpassword=$PASSWORD
