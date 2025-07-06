@@ -27,6 +27,7 @@ public class HomePage extends BasePage{
     private final SelenideElement GROUP_ACCESS_BUTTON = $(byText("Group access"));
     private final SelenideElement DROP_DOWN_GROUP_ACCESS = $x("//*[text()='Member access']" +
             "/ancestor::div[2]//*[@data-icon='chevron-down']");
+    private final SelenideElement SEARCH_FIELD = $x("//input[@aria-label='Search for projects']");
 
 
     @Override
@@ -97,6 +98,12 @@ public class HomePage extends BasePage{
             log.error(e.getMessage());
             Assert.fail("Project is not created");
         }
+    }
+
+    public HomePage searchProjectByName(String symbolsFromProjectName, String project) {
+        SEARCH_FIELD.sendKeys(symbolsFromProjectName);
+        $(byText(project)).shouldBe(visible);
+        return this;
     }
 
     public HomePage deleteProject(String project) {

@@ -53,6 +53,7 @@ public class ProjectTest extends BaseTest{
         homePage.createPrivateWithGroupProject("ZIT");
         homePage.openPage()
                 .isPageOpened()
+                .searchProjectByName("Z", "ZIT")
                 .deleteProject("ZIT")
                 .isPageOpened();
     }
