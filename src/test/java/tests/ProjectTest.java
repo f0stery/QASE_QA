@@ -8,21 +8,24 @@ public class ProjectTest extends BaseTest{
 
     @Test (testName = "Авторизация", enabled = false, groups = {"smoke"}, retryAnalyzer = Retry.class)
     public void checkAuthorization() {
-        loginPage.openPage();
-        loginPage.login(email, password);
-        projectsPage.waitTillOpened();
+        loginPage.openPage()
+                .isPageOpened()
+                .login(email, password)
+                .isPageOpened();
     }
 
     @Test (testName = "Проверка на создание и удаление Public проекта", groups = {"smoke"},
             description = "Удачное создание и удаление Public проекта", retryAnalyzer = Retry.class)
     public void checkCreatePublicProject() {
-        loginPage.openPage();
-        loginPage.login(email, password);
-        projectsPage.waitTillOpened();
-        projectsPage.createPublicProject("QASE");
-        projectsPage.openPage();
-        projectsPage.waitTillOpened();
-        projectsPage.deleteProject("QASE");
+        loginPage.openPage()
+                .isPageOpened()
+                .login(email, password)
+                .isPageOpened();
+        homePage.createPublicProject("QASE");
+        homePage.openPage()
+                .isPageOpened()
+                .deleteProject("QASE")
+                .isPageOpened();
     }
 
     @Test (testName = "Проверка на создание и удаление Private проекта",
@@ -30,12 +33,14 @@ public class ProjectTest extends BaseTest{
             groups = {"smoke"},
             retryAnalyzer = Retry.class)
     public void checkCreatePrivateProject() {
-        loginPage.openPage();
-        loginPage.login(email, password);
-        projectsPage.waitTillOpened();
-        projectsPage.createPrivateProject("TSM");
-        projectsPage.openPage();
-        projectsPage.waitTillOpened();
-        projectsPage.deleteProject("TSM");
+        loginPage.openPage()
+                .isPageOpened()
+                .login(email, password)
+                .isPageOpened();
+        homePage.createPrivateProject("TSM");
+        homePage.openPage()
+                .isPageOpened()
+                .deleteProject("TSM")
+                .isPageOpened();
     }
 }

@@ -8,8 +8,9 @@ public class LoginTest extends BaseTest{
 
     @Test(testName = "Авторизация", enabled = true)
     public void checkLogin() {
-        loginPage.openPage();
-        loginPage.login(email, password);
-        projectsPage.waitTillOpened();
+        loginPage.openPage()
+                .isPageOpened()
+                .login(email, password)
+                .isPageOpened();
     }
 }

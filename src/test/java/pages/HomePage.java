@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 @Log4j2
-public class ProjectsPage {
+public class HomePage extends BasePage{
 
     private final SelenideElement PROJECT_NAME = $(By.id("project-name"));
     private final SelenideElement CREATE_NEW_PROJECT_BUTTON = $(byText("Create new project"));
@@ -19,21 +19,23 @@ public class ProjectsPage {
     private final SelenideElement NOT_ADD_MEMBERS = $(byText("Don't add members"));
     private final SelenideElement CREATE_PROJECT_BUTTON = $(byText("Create project"));
     private final SelenideElement PRIVATE_PROJECT = $(byText("Private"));
+    private final SelenideElement APPROVE_DELETE_BUTTON = $x("//span[text()='Delete project']");
     private final String ACTION_BUTTON = "button[aria-label='Open action menu']";
     private final SelenideElement REMOVE_BUTTON = $("[data-testid='remove']");
 
-    public void openPage() {
-        open("/projects");
+
+    @Override
+    public HomePage openPage() {
         log.info("Project page opening");
+        open("/projects");
+        return this;
     }
 
-    public void waitTillOpened() {
-        try {
-            CREATE_NEW_PROJECT_BUTTON.shouldBe(visible);
-        } catch (TimeoutException e) {
-            log.error(e.getMessage());
-            Assert.fail("Project page isn't opened");
-        }
+    @Override
+    public HomePage isPageOpened() {
+        CREATE_NEW_PROJECT_BUTTON.shouldBe(visible);
+        log.info("Project page is opened");
+        return this;
     }
 
     public void createPublicProject(String project) {
@@ -51,7 +53,6 @@ public class ProjectsPage {
             log.error(e.getMessage());
             Assert.fail("Project is not created");
         }
-
     }
 
     public void createPrivateProject(String project) {
@@ -74,7 +75,7 @@ public class ProjectsPage {
 
     }
 
-    public void deleteProject(String project) {
+    public HomePage deleteProject(String project) {
         log.info("Opening action menu for project '{}'", project);
         $(byText(project))
                 .ancestor("tr")
@@ -83,12 +84,13 @@ public class ProjectsPage {
         log.info("Click 'remove' button in action menu'{}'", project);
         REMOVE_BUTTON.click();
         log.info("Click 'Delete project' button for approving");
-        $x("//span[text()='Delete project']").click();
+        APPROVE_DELETE_BUTTON.click();
         try {
             PROJECT_NAME.shouldNotBe(visible);
         } catch (TimeoutException e) {
             log.error(e.getMessage());
             Assert.fail("Project is not deleted");
         }
+        return this;
     }
 }

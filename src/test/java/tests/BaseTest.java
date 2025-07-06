@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.Listeners;
 import pages.LoginPage;
-import pages.ProjectsPage;
+import pages.HomePage;
 import utils.TestListener;
 
 @Listeners(TestListener.class)
@@ -17,7 +17,7 @@ import utils.TestListener;
 public class BaseTest {
 
     LoginPage loginPage;
-    ProjectsPage projectsPage;
+    HomePage homePage;
 
     String email = System.getProperty("email", PropertyReader.getProperty("email"));
     String password = System.getProperty("password", PropertyReader.getProperty("password"));
@@ -32,7 +32,7 @@ public class BaseTest {
         Configuration.browserSize = "1920x1080";
 
         loginPage = new LoginPage();
-        projectsPage = new ProjectsPage();
+        homePage = new HomePage();
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
