@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
@@ -7,6 +8,7 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -22,6 +24,9 @@ public class HomePage extends BasePage{
     private final SelenideElement APPROVE_DELETE_BUTTON = $x("//span[text()='Delete project']");
     private final String ACTION_BUTTON = "button[aria-label='Open action menu']";
     private final SelenideElement REMOVE_BUTTON = $("[data-testid='remove']");
+    private final SelenideElement GROUP_ACCESS_BUTTON = $(byText("Group access"));
+    private final SelenideElement DROP_DOWN_GROUP_ACCESS = $x("//*[text()='Member access']" +
+            "/ancestor::div[2]//*[@data-icon='chevron-down']");
 
 
     @Override
@@ -72,7 +77,26 @@ public class HomePage extends BasePage{
             log.error(e.getMessage());
             Assert.fail("Project is not created");
         }
+    }
 
+    public void createPrivateWithGroupProject(String project) {
+        log.info("Click on create new project button");
+        CREATE_NEW_PROJECT_BUTTON.click();
+        log.info("Set Project name: '{}'", project);
+        PROJECT_NAME.setValue(project);
+        log.info("Set Private group for project");
+        PRIVATE_PROJECT.click();
+        log.info("Set Group access: Owner group");
+        GROUP_ACCESS_BUTTON.click();
+        DROP_DOWN_GROUP_ACCESS.click();
+        $(byText("Owner group")).shouldBe(visible, enabled).click();
+        CREATE_PROJECT_BUTTON.click();
+        try {
+            PROJECT_NAME.shouldBe(visible);
+        } catch (TimeoutException e) {
+            log.error(e.getMessage());
+            Assert.fail("Project is not created");
+        }
     }
 
     public HomePage deleteProject(String project) {

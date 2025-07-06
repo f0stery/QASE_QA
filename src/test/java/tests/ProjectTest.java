@@ -43,4 +43,17 @@ public class ProjectTest extends BaseTest{
                 .deleteProject("TSM")
                 .isPageOpened();
     }
+
+    @Test
+    public void checkCreatePrivateWithGroupProject() {
+        loginPage.openPage()
+                .isPageOpened()
+                .login(email, password)
+                .isPageOpened();
+        homePage.createPrivateWithGroupProject("ZIT");
+        homePage.openPage()
+                .isPageOpened()
+                .deleteProject("ZIT")
+                .isPageOpened();
+    }
 }
