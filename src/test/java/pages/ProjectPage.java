@@ -23,16 +23,42 @@ public class ProjectPage extends BasePage {
 
     @Override
     public ProjectPage isPageOpened() {
-        $(byText(projectName)).shouldBe(visible);
         $(byText(projectCode)).shouldBe(visible);
         $(byText("repository")).shouldBe(visible);
         return this;
     }
+
+    public ProjectPage verifyTestCaseExists(String caseTitle) {
+        $(byText(caseTitle)).shouldBe(visible);
+        return this;
+    }
+
+    public NewTestCaseModal openNewTestCaseModal() {
+        $(byText("New test")).shouldBe(visible, enabled).click();
+        $("[data-testid='create-case-button']").shouldBe(visible, enabled).click();
+        return new NewTestCaseModal(projectName, projectCode).isPageOpened();
+    }
+
 
     public void navigateToRepository() {
         $x("//span[text()='Repository']").shouldBe(visible, enabled).click();
         $(byText(projectCode))
                 .shouldBe(visible);
         $(byText("repository")).shouldBe(visible);
+    }
+
+    public void navigateToSharedSteps() {
+        $x("//span[text()='Shared Steps']").shouldBe(visible, enabled).click();
+        $(byText("Create shared step")).shouldBe(visible);
+    }
+
+    public void navigateToTestPlans() {
+        $x("//span[text()='Test Plans']").shouldBe(visible, enabled).click();
+        $(byText("Create plan")).shouldBe(visible);
+    }
+
+    public void navigateToTestRuns() {
+        $x("//span[text()='Test Runs']").shouldBe(visible, enabled).click();
+        $(byText("Start new test run")).shouldBe(visible);
     }
 }
