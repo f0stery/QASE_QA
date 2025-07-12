@@ -13,69 +13,73 @@ public class ProjectsTest extends BaseTest{
     private static final String DEFAULT_PROJECT = "ZIT";
     private static final String DEFAULT_CODE = "ZIT31";
 
-    @Test (testName = "Проверка на создание и удаление Public проекта", groups = {"smoke"},
-            description = "Удачное создание и удаление Public проекта", retryAnalyzer = Retry.class)
+    @Test (testName = "Check create public project", groups = {"smoke"},
+            description = "Create public project", retryAnalyzer = Retry.class)
     public void checkCreatePublicProject() {
 
         final String projectName = generateProjectName("QASE");
         final String projectCode = generateProjectCode(projectName);
         log.info("Testing project: {} ({})", projectName, projectCode);
 
-        homePage.createPublicProject(projectName, projectCode);
+        homePage.createPublicProject(projectName, projectCode)
+                        .verifyProjectCreated(projectCode, projectName);
         homePage.openPage()
                 .isPageOpened()
-                .deleteProject(projectName)
-                .isPageOpened();
+                .deleteProject(projectName);
     }
 
-    @Test (testName = "Проверка создания проекта с одинаковым Project CODE",
-            description = "Негативный тест на создание проекта с одинаковым Project CODE", retryAnalyzer = Retry.class)
+    @Test (testName = "Check create project with same Project CODE",
+            description = "Negative test create with same code project ", retryAnalyzer = Retry.class)
     public void createSameNameProject() {
 
         final String projectName = generateProjectName("SAME");
         final String projectCode = generateProjectCode(projectName);
 
-        homePage.createPublicProject(projectName, projectCode);
+        homePage.createPublicProject(projectName, projectCode)
+                        .verifyProjectCreated(projectCode, projectName);
         homePage.openPage()
-                        .isPageOpened();
-
-        homePage.checkCreateSameNameProject(projectName, projectCode)
+                .isPageOpened()
+                .checkCreateSameNameProject(projectName, projectCode)
                 .openPage()
                 .isPageOpened()
                 .deleteProject(projectName);
     }
 
-    @Test (testName = "Проверка на создание и удаление Private проекта",
-            description = "Удачное создание и удаление Private проекта",
+    @Test (testName = "Check create private project",
+            description = "Create private project",
             groups = {"smoke"}, retryAnalyzer = Retry.class)
     public void checkCreatePrivateProject() {
 
         final String projectName = generateProjectName("TSM");
         final String projectCode = generateProjectCode(projectName);
 
-        homePage.createPrivateProject(projectName, projectCode);
+        homePage.createPrivateProject(projectName, projectCode)
+                .verifyProjectCreated(projectCode, projectName);
         homePage.openPage()
                 .isPageOpened()
-                .deleteProject(projectName)
-                .isPageOpened();
+                .deleteProject(projectName);
     }
 
-    @Test (groups = "smoke")
-    public void testProjectLifecycle() {
-        String name = generateProjectName("QASE");
-        String code = generateProjectCode(name);
-
-        homePage.createPublicProject(name, code)
-                .verifyProjectCreated(code, name);
-    }
-
-    @Test(retryAnalyzer = Retry.class)
+    @Test(testName = "Check Search function",
+            description = "Search Defoult project",
+            retryAnalyzer = Retry.class, priority = 1)
     public void checkSearchProject() {
-        homePage.createPrivateWithGroupProject(DEFAULT_PROJECT, DEFAULT_CODE);
+        homePage.createPrivateWithGroupProject(DEFAULT_PROJECT, DEFAULT_CODE)
+                        .verifyProjectCreated(DEFAULT_CODE, DEFAULT_PROJECT);
         homePage.openPage()
                 .isPageOpened()
-                .searchProjectByName("Z", DEFAULT_PROJECT)
+                .searchProjectByName("Z", DEFAULT_PROJECT);
+    }
+
+    @Test(testName = "Check delete project",
+            description = "Deleted project test",
+            dependsOnMethods = "checkSearchProject",
+            retryAnalyzer = Retry.class,
+            priority = 2)
+    public void checkRemoveProject() {
+        homePage.openPage()
+                .isPageOpened()
                 .deleteProject(DEFAULT_PROJECT)
-                .isPageOpened();
+                .verifyProjectDeleted(DEFAULT_PROJECT);
     }
 }
