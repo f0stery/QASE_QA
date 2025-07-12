@@ -20,6 +20,7 @@
         <jackson.version>2.15.0</jackson.version>
         <testng.version>7.11.0</testng.version>
         <selenide.version>7.9.3</selenide.version>
+        <rest-assured.version>5.5.5</rest-assured.version>
     </properties>
 
     <dependencyManagement>
@@ -93,6 +94,14 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

@@ -26,7 +26,6 @@ public class TestListener implements ITestListener {
     public void onTestFailure(ITestResult iTestResult) {
         log.error("======================================== FAILED TEST {} Duration: {} ========================================", iTestResult.getName(),
                 getExecutionTime(iTestResult));
-        ITestContext context = iTestResult.getTestContext();
     }
 
     @Override

@@ -17,6 +17,7 @@ jobs:
     env:
       EMAIL: ${{secrets.QASE_USER_EMAIL}}
       PASSWORD: ${{secrets.QASE_USER_PASSWORD}}
+      TOKEN: ${secrets.QASE_TOKEN}}
 
     steps:
     - uses: actions/checkout@v4
