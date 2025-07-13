@@ -61,6 +61,7 @@ public class HomePage extends BasePage{
     }
 
     public HomePage searchProjectByName(String symbolsFromProjectName, String projectName) {
+        log.info("Search project with symbol: {}", symbolsFromProjectName);
         SEARCH_FIELD.sendKeys(symbolsFromProjectName);
         $(byText(projectName)).shouldBe(visible);
         return this;
@@ -133,8 +134,6 @@ public class HomePage extends BasePage{
                 .click();
         return this;
     }
-
-
 
     public HomePage confirmDeletion() {
         log.info("Click 'Delete project' button for approving");

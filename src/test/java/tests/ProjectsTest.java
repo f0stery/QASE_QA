@@ -34,7 +34,8 @@ public class ProjectsTest extends BaseTest{
         final String projectName = generateProjectName("SAME");
         final String projectCode = generateProjectCode(projectName);
 
-        project.createAndOpenProject(projectName, projectCode);
+        project.createAndOpenProject(projectName, projectCode)
+                        .verifyProjectCreated(projectCode, projectName);
 
         homePage.openPage()
                 .isPageOpened()
@@ -64,7 +65,9 @@ public class ProjectsTest extends BaseTest{
             retryAnalyzer = Retry.class, priority = 1)
     public void checkSearchProject() {
 
-        homePage.createPrivateWithGroupProject(DEFAULT_PROJECT, DEFAULT_CODE);
+
+        homePage.createPrivateWithGroupProject(DEFAULT_PROJECT, DEFAULT_CODE)
+                .verifyProjectCreated(DEFAULT_CODE, DEFAULT_PROJECT);
         homePage.openPage()
                 .isPageOpened()
                 .searchProjectByName("Z", DEFAULT_PROJECT);

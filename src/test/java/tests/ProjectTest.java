@@ -1,20 +1,51 @@
 package tests;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.ProjectPage;
 
 import static utils.TestDataGenerator.generateProjectCode;
 import static utils.TestDataGenerator.generateProjectName;
 
 public class ProjectTest extends BaseTest {
 
-    @Test
-    public void testExample() {
+    private String projectName;
+    private String projectCode;
 
-        String projectName = generateProjectName("QASE");
-        String projectCode = generateProjectCode(projectName);
+    @BeforeMethod
+    public void setUpProject() {
+        projectName = generateProjectName("QASE");
+        projectCode = generateProjectCode(projectName);
+        projectPage = new ProjectPage(projectName, projectCode);
+    }
+
+    @Test
+    public void createSuiteAndCase() {
 
         project.createAndOpenProject(projectName, projectCode)
+                .createSuite("Smoke", "Check authorization function", "nothing",
+                        "Project root")
                 .openNewTestCaseModal()
-                .createTestCase("Auth");
+                .createTestCase("Auth", "Draft", "Critical", "High", "Smoke", "Unit",
+                        "Yes", "Not set", "Positive", "Automated")
+                .verifyCreateSuite("Smoke");
+
+        homePage.openPage().deleteProject(projectName);
+    }
+
+    @Test
+    public void editSuite() {
+        project.createAndOpenProject(projectName, projectCode)
+                .createSuite("Smoke", "Check authorization function", "nothing",
+                        "Project root")
+                .openNewTestCaseModal()
+                .createTestCase("Auth", "Draft", "Critical", "High", "Smoke", "Unit",
+                        "Yes", "Not set", "Positive", "Automated")
+                .verifyCreateSuite("Smoke")
+                .openPage()
+                .isPageOpened()
+                .clickOnSuiteFunction("Smoke", "Edit suite");
+
+        projectPage.editSuite("Smoke77", "Check new auth", "77", "Project root");
     }
 }
