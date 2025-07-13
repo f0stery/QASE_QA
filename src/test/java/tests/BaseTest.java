@@ -3,10 +3,8 @@ package tests;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 import com.codeborne.selenide.Configuration;
-import org.testng.annotations.Listeners;
 import pages.LoginPage;
 import pages.HomePage;
 import pages.ProjectPage;
@@ -27,28 +25,36 @@ public class BaseTest {
     String email = System.getProperty("email", PropertyReader.getProperty("email"));
     String password = System.getProperty("password", PropertyReader.getProperty("password"));
 
-    @BeforeMethod
-    public void initDriver() {
-        Configuration.browser = "chrome";
+    @BeforeClass
+    @Parameters("browser")
+    public void initDriver(String browser) {
+
+        System.out.println("TEST PARAMETER browser: " + browser);
+
+        Configuration.browser = browser;
+        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 10000;
         Configuration.clickViaJs = true;
-        Configuration.headless = true;
         Configuration.browserSize = "1920x1080";
+        Configuration.remote = System.getProperty("remote.url");
 
-        loginPage = new LoginPage();
-        homePage = new HomePage();
-
-
-        auth = new AuthSteps(loginPage, homePage);
-        project = new ProjectSteps(homePage);
-
-        auth.login(email, password);
+        System.out.println("CONFIGURED browser: " + Configuration.browser);
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(false)
         );
+    }
+
+    @BeforeMethod
+    public void initPages() {
+        loginPage = new LoginPage();
+        homePage = new HomePage();
+        auth = new AuthSteps(loginPage, homePage);
+        project = new ProjectSteps(homePage);
+
+        auth.login(email, password);
     }
 
     @AfterMethod(alwaysRun = true)
