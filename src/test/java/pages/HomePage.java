@@ -49,7 +49,7 @@ public class HomePage extends BasePage{
         return this;
     }
 
-    public HomePage createPublicProject(String projectName, String projectCode) {
+    public ProjectPage createPublicProject(String projectName, String projectCode) {
         log.info("Click on create new project button");
         CREATE_NEW_PROJECT_BUTTON.click();
         fillProjectData(projectName, projectCode);
@@ -57,20 +57,19 @@ public class HomePage extends BasePage{
         PUBLIC_PROJECT.click();
         log.info("Click create project button");
         CREATE_PROJECT_BUTTON.shouldBe(enabled).click();
-        verifyProjectCreated(projectName, projectCode);
-        return this;
+        return new ProjectPage(projectName, projectCode);
     }
 
-    public HomePage searchProjectByName(String symbolsFromProjectName, String project) {
+    public HomePage searchProjectByName(String symbolsFromProjectName, String projectName) {
         SEARCH_FIELD.sendKeys(symbolsFromProjectName);
-        $(byText(project)).shouldBe(visible);
+        $(byText(projectName)).shouldBe(visible);
         return this;
     }
 
-    public HomePage createPrivateProject(String project, String projectCode) {
+    public ProjectPage createPrivateProject(String projectName, String projectCode) {
         log.info("Click on create new project button");
         CREATE_NEW_PROJECT_BUTTON.click();
-        fillProjectData(project, projectCode);
+        fillProjectData(projectName, projectCode);
         log.info("Set Private group for project");
         PRIVATE_PROJECT.click();
         log.info("Set Member access: Don't add members");
@@ -78,16 +77,16 @@ public class HomePage extends BasePage{
         log.info("Click create project button");
         CREATE_PROJECT_BUTTON.shouldBe(enabled).click();
         log.info("Check create {} repository", projectCode);
-        $(byText(project))
+        $(byText(projectName))
                 .shouldBe(visible);
-        log.info("{} repository is created, with Project Name: '{}'", projectCode, project);
-        return this;
+        log.info("{} repository is created, with Project Name: '{}'", projectCode, projectName);
+        return new ProjectPage(projectName, projectCode);
     }
 
-    public HomePage createPrivateWithGroupProject(String project, String projectCode) {
+    public ProjectPage createPrivateWithGroupProject(String projectName, String projectCode) {
         log.info("Click on create new project button");
         CREATE_NEW_PROJECT_BUTTON.click();
-        fillProjectData(project, projectCode);
+        fillProjectData(projectName, projectCode);
         log.info("Set Private group for project");
         PRIVATE_PROJECT.click();
         log.info("Set Group access: Owner group");
@@ -95,16 +94,16 @@ public class HomePage extends BasePage{
         DROP_DOWN_GROUP_ACCESS.click();
         OWNER_GROUP_OPTION.shouldBe(visible, enabled).click();
         CREATE_PROJECT_BUTTON.shouldBe(enabled).click();
-        $(byText(project))
+        $(byText(projectName))
                 .shouldBe(visible);
-        log.info("{} repository is created, with Project Name: '{}'", projectCode, project);
-        return this;
+        log.info("{} repository is created, with Project Name: '{}'", projectCode, projectName);
+        return new ProjectPage(projectName, projectCode);
     }
 
-    public HomePage checkCreateSameNameProject(String project, String projectCode) {
+    public HomePage checkCreateSameNameProject(String projectName, String projectCode) {
         log.info("Click on create new project button");
         CREATE_NEW_PROJECT_BUTTON.click();
-        fillProjectData(project, projectCode);
+        fillProjectData(projectName, projectCode);
         log.info("Set Public group for project");
         PUBLIC_PROJECT.click();
         log.info("Click create project button");
@@ -135,13 +134,7 @@ public class HomePage extends BasePage{
         return this;
     }
 
-    public ProjectPage verifyProjectCreated(String projectCode, String projectName) {
-        log.info("Check create {} repository", projectCode);
-        $(byText(projectCode)).shouldBe(visible);
-        $(byText("repository")).shouldBe(visible);
-        log.info("{} repository is created, with Project Name: '{}'", projectCode, projectName);
-        return new ProjectPage(projectName, projectCode);
-    }
+
 
     public HomePage confirmDeletion() {
         log.info("Click 'Delete project' button for approving");

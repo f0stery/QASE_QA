@@ -6,11 +6,12 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import com.codeborne.selenide.Configuration;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 import pages.LoginPage;
 import pages.HomePage;
 import pages.ProjectPage;
+import steps.AuthSteps;
+import steps.ProjectSteps;
 import utils.TestListener;
 
 @Listeners(TestListener.class)
@@ -20,16 +21,11 @@ public class BaseTest {
     HomePage homePage;
     ProjectPage projectPage;
 
+    AuthSteps auth;
+    ProjectSteps project;
+
     String email = System.getProperty("email", PropertyReader.getProperty("email"));
     String password = System.getProperty("password", PropertyReader.getProperty("password"));
-
-    @BeforeSuite
-    public void globalSetup() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
-                .screenshots(true)
-                .savePageSource(false)
-        );
-    }
 
     @BeforeMethod
     public void initDriver() {
@@ -37,29 +33,22 @@ public class BaseTest {
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 10000;
         Configuration.clickViaJs = true;
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.browserSize = "1920x1080";
 
         loginPage = new LoginPage();
         homePage = new HomePage();
 
-        authorization();
-    }
 
-    public HomePage authorization() {
-        loginPage.openPage()
-                .isPageOpened()
-                .login(email, password)
-                .isPageOpened();
-        return new HomePage();
-    }
+        auth = new AuthSteps(loginPage, homePage);
+        project = new ProjectSteps(homePage);
 
-    public ProjectPage createAndOpenProject(String name, String code) {
-        projectPage = homePage.createPublicProject(name, code)
-                .verifyProjectCreated(code, name)
-                .openPage()
-                .isPageOpened();
-        return projectPage;
+        auth.login(email, password);
+
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false)
+        );
     }
 
     @AfterMethod(alwaysRun = true)

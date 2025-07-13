@@ -13,7 +13,7 @@ public class ProjectTest extends BaseTest {
         String projectName = generateProjectName("QASE");
         String projectCode = generateProjectCode(projectName);
 
-        createAndOpenProject(projectName, projectCode)
+        project.createAndOpenProject(projectName, projectCode)
                 .openNewTestCaseModal()
                 .createTestCase("Auth");
     }

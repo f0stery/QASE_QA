@@ -19,10 +19,9 @@ public class ProjectsTest extends BaseTest{
 
         final String projectName = generateProjectName("QASE");
         final String projectCode = generateProjectCode(projectName);
-        log.info("Testing project: {} ({})", projectName, projectCode);
 
-        homePage.createPublicProject(projectName, projectCode)
-                        .verifyProjectCreated(projectCode, projectName);
+        project.createAndOpenProject(projectName, projectCode)
+                .verifyProjectCreated(projectCode, projectName);
         homePage.openPage()
                 .isPageOpened()
                 .deleteProject(projectName);
@@ -35,8 +34,8 @@ public class ProjectsTest extends BaseTest{
         final String projectName = generateProjectName("SAME");
         final String projectCode = generateProjectCode(projectName);
 
-        homePage.createPublicProject(projectName, projectCode)
-                        .verifyProjectCreated(projectCode, projectName);
+        project.createAndOpenProject(projectName, projectCode);
+
         homePage.openPage()
                 .isPageOpened()
                 .checkCreateSameNameProject(projectName, projectCode)
@@ -53,8 +52,8 @@ public class ProjectsTest extends BaseTest{
         final String projectName = generateProjectName("TSM");
         final String projectCode = generateProjectCode(projectName);
 
-        homePage.createPrivateProject(projectName, projectCode)
-                .verifyProjectCreated(projectCode, projectName);
+        project.createAndOpenPrivateProject(projectName, projectCode)
+                        .verifyProjectCreated(projectCode, projectName);
         homePage.openPage()
                 .isPageOpened()
                 .deleteProject(projectName);
@@ -64,8 +63,8 @@ public class ProjectsTest extends BaseTest{
             description = "Search Defoult project",
             retryAnalyzer = Retry.class, priority = 1)
     public void checkSearchProject() {
-        homePage.createPrivateWithGroupProject(DEFAULT_PROJECT, DEFAULT_CODE)
-                        .verifyProjectCreated(DEFAULT_CODE, DEFAULT_PROJECT);
+
+        homePage.createPrivateWithGroupProject(DEFAULT_PROJECT, DEFAULT_CODE);
         homePage.openPage()
                 .isPageOpened()
                 .searchProjectByName("Z", DEFAULT_PROJECT);
