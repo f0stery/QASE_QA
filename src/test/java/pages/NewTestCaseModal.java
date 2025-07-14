@@ -35,6 +35,8 @@ public class NewTestCaseModal extends BasePage {
     public ProjectPage createTestCase(String title, String status, String severity, String priority,
                                       String type, String layer, String flaky, String milestone,
                                       String behavior, String automationStatus) {
+        log.info("Create test case with params: {}, {}, {}, {}, {}, {}, {}, {}, {}, {}",
+                title, status, severity, priority, type, layer, flaky, milestone, behavior, automationStatus);
         new Input().write(title);
         new Picklist("Status").select(status);
         new Picklist("Severity").select(severity);
@@ -51,7 +53,7 @@ public class NewTestCaseModal extends BasePage {
     }
 
     public NewTestCaseModal clickSaveButton() {
-        log.info("Click on Save buttom");
+        log.info("Click on Save button");
         $(By.id("save-case")).click();
         return this;
     }

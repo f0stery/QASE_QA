@@ -3,6 +3,7 @@ package tests;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.*;
 import com.codeborne.selenide.Configuration;
 import pages.LoginPage;
@@ -12,6 +13,7 @@ import steps.AuthSteps;
 import steps.ProjectSteps;
 import utils.TestListener;
 
+@Log4j2
 @Listeners(TestListener.class)
 public class BaseTest {
 
@@ -29,7 +31,7 @@ public class BaseTest {
     @Parameters("browser")
     public void initDriver(@Optional("chrome") String browser) {
 
-        System.out.println("TEST PARAMETER browser: " + browser);
+        log.info("TEST PARAMETER browser: {}", browser);
 
         Configuration.browser = browser;
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
@@ -39,7 +41,7 @@ public class BaseTest {
         Configuration.browserSize = "1920x1080";
         Configuration.remote = System.getProperty("remote.url");
 
-        System.out.println("CONFIGURED browser: " + Configuration.browser);
+        log.info("CONFIGURED browser: {}", Configuration.browser);
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
