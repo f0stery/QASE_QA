@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","31084","editSuite","CrossBrowser Suite","Mon Jul 14 17:16:13 GMT 2025","failed","Mon Jul 14 17:16:44 GMT 2025","tests.ProjectTest","Edge Test","tests.ProjectTest","editSuite"
+"","25823","editSuite","CrossBrowser Suite","Mon Jul 14 17:15:23 GMT 2025","failed","Mon Jul 14 17:15:49 GMT 2025","tests.ProjectTest","Firefox Test","tests.ProjectTest","editSuite"
+"","11055","createSuiteAndCase","CrossBrowser Suite","Mon Jul 14 17:15:26 GMT 2025","passed","Mon Jul 14 17:15:37 GMT 2025","tests.ProjectTest","Firefox Test","tests.ProjectTest","createSuiteAndCase"
+"","22088","createSuiteAndCase","CrossBrowser Suite","Mon Jul 14 17:16:12 GMT 2025","passed","Mon Jul 14 17:16:34 GMT 2025","tests.ProjectTest","Edge Test","tests.ProjectTest","createSuiteAndCase"
+"","18822","editSuite","CrossBrowser Suite","Mon Jul 14 17:14:47 GMT 2025","failed","Mon Jul 14 17:15:06 GMT 2025","tests.ProjectTest","Chrome Test","tests.ProjectTest","editSuite"
+"","8491","createSuiteAndCase","CrossBrowser Suite","Mon Jul 14 17:14:46 GMT 2025","passed","Mon Jul 14 17:14:54 GMT 2025","tests.ProjectTest","Chrome Test","tests.ProjectTest","createSuiteAndCase"
