@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         browser: [chrome, firefox, edge]
-        faul-fast: false
+        fail-fast: "false"
 
     env:
       EMAIL: ${{secrets.QASE_USER_EMAIL}}
@@ -35,8 +35,8 @@ jobs:
     - name: Install browsers
       uses: browser-actions/setup-browsers@v1
       with:
-      browser: ${{matrix.browser}}
-      install-deps: true
+        browser: ${{matrix.browser}}
+        install-deps: true
 
     - name: Run tests
       run: mvn clean test -Dbrowser=$BROWSER -Demail=$EMAIL -Dpassword=$PASSWORD
