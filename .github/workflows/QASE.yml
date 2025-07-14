@@ -10,18 +10,13 @@ on:
     branches: [ "master" ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        browser: [chrome, firefox, edge]
-        fail-fast: "false"
 
     env:
       EMAIL: ${{secrets.QASE_USER_EMAIL}}
       PASSWORD: ${{secrets.QASE_USER_PASSWORD}}
       TOKEN: ${secrets.QASE_TOKEN}}
-      BROWSER: ${{matrix.browser}}
 
     steps:
     - uses: actions/checkout@v4
@@ -32,14 +27,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Install browsers
-      uses: browser-actions/setup-browsers@v1
-      with:
-        browser: ${{matrix.browser}}
-        install-deps: true
-
     - name: Run tests
-      run: mvn clean test -Dbrowser=$BROWSER -Demail=$EMAIL -Dpassword=$PASSWORD
+      run: mvn clean test -Demail=$EMAIL -Dpassword=$PASSWORD
 
     - name: Get Allure history
       uses: actions/checkout@v2
