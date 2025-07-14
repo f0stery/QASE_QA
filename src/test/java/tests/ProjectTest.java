@@ -30,7 +30,7 @@ public class ProjectTest extends BaseTest {
                         "Yes", "Not set", "Positive", "Automated")
                 .verifyCreateSuite("Smoke");
 
-//        homePage.openPage().isPageOpened().deleteProject(projectName);
+        homePage.openPage().isPageOpened().deleteProject(projectName);
     }
 
     @Test(enabled = true)
