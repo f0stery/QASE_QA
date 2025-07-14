@@ -152,9 +152,11 @@ public class HomePage extends BasePage{
     }
 
     public HomePage deleteProject(String projectName) {
+        log.info("Deleting project {}", projectName);
         openProjectActionsMenu(projectName);
         clickRemoveInActionsMenu(projectName);
         confirmDeletion();
+        log.info("Project {} is deleted", projectName);
         return verifyProjectDeleted(projectName);
     }
 }

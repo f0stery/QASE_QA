@@ -61,6 +61,7 @@ public class ProjectPage extends BasePage {
     }
 
     public NewTestCaseModal openNewTestCaseModal() {
+        log.info("Opening menu 'new test case'");
         CREATE_NEW_TEST_BUTTON.shouldBe(visible, enabled).click();
         CREATE_CASE_BUTTON.shouldBe(visible, enabled).click();
         return new NewTestCaseModal(projectName, projectCode).isPageOpened();
@@ -68,44 +69,42 @@ public class ProjectPage extends BasePage {
 
     public ProjectPage verifyCreateSuite(String suiteName) {
         $(byText(suiteName)).shouldBe(visible);
+        log.info("Suite created");
         return this;
     }
 
     public void clickOnSuiteFunction(String suiteName, String suiteFunction){
+        log.info("Click on '{}' in suite", suiteFunction);
         $x(String.format("//h3[contains(., '%s')]/following::button[@aria-label='%s']", suiteName, suiteFunction))
-
                 .shouldBe(visible, enabled)
                 .click();
     }
 
     public ProjectPage editSuite(String suiteName, String description, String precondition, String parentSuite) {
-
+        log.info("Edit suite with params: {}, {}, {}, {}", suiteName, description, precondition, parentSuite);
         SUITE_NAME_FIELD.setValue(suiteName);
         SUITE_DESCRIPTION_FIELD.setValue(description);
         SUITE_PRECONDITION_FIELD.setValue(precondition);
         PARENT_SUITE_LIST.click();
-
         $(byText(parentSuite)).click();
-
         SAVE_SUITE_BUTTON.click();
-
         return this;
     }
 
     public ProjectPage createSuite(String suiteName, String description, String precondition, String parentSuite) {
+        log.info("Create suite with params: {}, {}, {}, {}", suiteName, description, precondition, parentSuite);
         ADD_SUITE_BUTTON.shouldBe(visible, enabled).click();
         SUITE_NAME_FIELD.setValue(suiteName);
         SUITE_DESCRIPTION_FIELD.setValue(description);
         SUITE_PRECONDITION_FIELD.setValue(precondition);
         PARENT_SUITE_LIST.click();
-
         $(byText(parentSuite)).click();
-
         SUBMIT_CREATE_SUITE_BUTTON.click();
         return new ProjectPage(projectName, projectCode).isPageOpened();
     }
 
     public SelenideElement menuButtonByLabel(String label) {
+        log.info("Select {} in project menu", label);
         return $x(String.format("//span[text()='%s']", label))
                 .shouldBe(visible, enabled);
     }

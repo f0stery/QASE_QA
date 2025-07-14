@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import wrappers.Picklist;
 import wrappers.Input;
@@ -8,6 +9,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
+@Log4j2
 public class NewTestCaseModal extends BasePage {
 
     private final String projectName;
@@ -49,6 +51,7 @@ public class NewTestCaseModal extends BasePage {
     }
 
     public NewTestCaseModal clickSaveButton() {
+        log.info("Click on Save buttom");
         $(By.id("save-case")).click();
         return this;
     }
