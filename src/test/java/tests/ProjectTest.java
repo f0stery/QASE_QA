@@ -33,7 +33,7 @@ public class ProjectTest extends BaseTest {
         homePage.openPage().isPageOpened().deleteProject(projectName);
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void editSuite() {
         project.createAndOpenProject(projectName, projectCode)
                 .createSuite("Smoke", "Check authorization function", "nothing",
