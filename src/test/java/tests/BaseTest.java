@@ -31,15 +31,16 @@ public class BaseTest {
     @Parameters("browser")
     public void initDriver(@Optional("chrome") String browser) {
 
-        log.info("TEST PARAMETER browser: {}", browser);
+        WebDriverRunner.closeWebDriver();
 
         Configuration.browser = browser;
+        log.info("INITIALIZING BROWSER: {}", browser);
+
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 10000;
         Configuration.clickViaJs = true;
         Configuration.browserSize = "1920x1080";
-        Configuration.remote = System.getProperty("remote.url");
 
         log.info("CONFIGURED browser: {}", Configuration.browser);
 
