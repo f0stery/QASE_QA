@@ -27,7 +27,7 @@ public class BaseTest {
 
     @BeforeClass
     @Parameters("browser")
-    public void initDriver(String browser) {
+    public void initDriver(@Optional("chrome") String browser) {
 
         System.out.println("TEST PARAMETER browser: " + browser);
 
