@@ -19,34 +19,50 @@ public class ProjectTest extends BaseTest {
         projectPage = new ProjectPage(projectName, projectCode);
     }
 
-    @Test(enabled = true)
-    public void createSuiteAndCase() {
-
-        project.createAndOpenProject(projectName, projectCode)
-                .createSuite("Smoke", "Check authorization function", "nothing",
-                        "Project root")
+    @Test (enabled = true)
+    public void checkCreateTestCase() {
+        project
+                .createAndOpenProject(projectName, projectCode)
                 .openNewTestCaseModal()
-                .createTestCase("Auth", "Draft", "Critical", "High", "Smoke", "Unit",
-                        "Yes", "Not set", "Positive", "Automated")
-                .verifyCreateSuite("Smoke");
-
+                .createTestCase(testCase);
+        SoftAssert.assertTrue(projectPage.verifyTestCaseExists(testCase.getTitle()), "Test case" +
+                testCase.getTitle() + "not create");
         homePage.openPage().isPageOpened().deleteProject(projectName);
     }
 
     @Test(enabled = true)
-    public void editSuite() {
-        project.createAndOpenProject(projectName, projectCode)
-                .createSuite("Smoke", "Check authorization function", "nothing",
-                        "Project root")
-                .openNewTestCaseModal()
-                .createTestCase("Auth", "Draft", "Critical", "High", "Smoke", "Unit",
-                        "Yes", "Not set", "Positive", "Automated")
-                .verifyCreateSuite("Smoke")
+    public void checkCreateSuite() {
+        project
+                .createAndOpenProject(projectName, projectCode);
+        projectPage
                 .openPage()
                 .isPageOpened()
-                .clickOnSuiteFunction("Smoke", "Edit suite");
+                .createSuite("Smoke", "Check authorization function", "nothing",
+                        "Project root");
+        SoftAssert.assertTrue(projectPage.verifyCreateSuite("Smoke"),
+                "Suite is not create");
+        homePage.openPage().isPageOpened().deleteProject(projectName);
+    }
 
-        projectPage.editSuite("Smoke77", "Check new auth", "77", "Project root");
+    @Test(enabled = true)
+    public void checkEditSuite() {
+        project
+                .createAndOpenProject(projectName, projectCode)
+                .createSuite("Smoke", "Check authorization function", "nothing",
+                        "Project root");
+        SoftAssert.assertTrue(projectPage.verifyCreateSuite("Smoke"),
+                "Suite not create");
+        projectPage
+                .openNewTestCaseModal()
+                .createTestCase(testCase)
+                .isPageOpened()
+                .clickOnSuiteFunction("Smoke", "Edit suite");
+        projectPage
+                .editSuite("Smoke77", "Check new auth", "77", "Project root")
+                .openPage()
+                .isPageOpened();
+        SoftAssert.assertTrue(projectPage.verifyCreateSuite("Smoke77"),
+                        "Suite not create");
         homePage.openPage().isPageOpened().deleteProject(projectName);
     }
 }

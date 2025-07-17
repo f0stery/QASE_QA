@@ -24,7 +24,8 @@ public class HomePage extends BasePage{
             DROP_DOWN_GROUP_ACCESS = $x("//*[text()='Member access']" +
             "/ancestor::div[2]//*[@data-icon='chevron-down']"),
             SEARCH_FIELD = $x("//input[@aria-label='Search for projects']"),
-            OWNER_GROUP_OPTION = $(byText("Owner group"));
+            OWNER_GROUP_OPTION = $(byText("Owner group")),
+            UPGRAGE_POPUP = $(byText("Time to upgrade!"));
     private final String ACTION_BUTTON = "button[aria-label='Open action menu']",
             CODE_ALREADY_USE_ERROR = "The selected project code is already in use.";
 
@@ -56,7 +57,7 @@ public class HomePage extends BasePage{
         log.info("Set Public group for project");
         PUBLIC_PROJECT.click();
         log.info("Click create project button");
-        CREATE_PROJECT_BUTTON.shouldBe(enabled).click();
+        CREATE_PROJECT_BUTTON.shouldBe(visible, enabled).click();
         return new ProjectPage(projectName, projectCode);
     }
 
