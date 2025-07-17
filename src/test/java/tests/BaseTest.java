@@ -43,7 +43,7 @@ public class BaseTest {
         Configuration.browser = browser;
         log.info("INITIALIZING BROWSER: {}", browser);
 
-        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 10000;
         Configuration.clickViaJs = true;
