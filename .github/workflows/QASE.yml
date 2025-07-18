@@ -14,9 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      EMAIL: ${{secrets.SECOND_EMAIL_USER}}
-      PASSWORD: ${{secrets.SECOND_PASSWORD_USER}}
-      TOKEN: ${secrets.SECOND_TOKEN_USER}}
+      EMAIL: ${{ secrets.SECOND_EMAIL_USER }}
+      PASSWORD: ${{ secrets.SECOND_PASSWORD_USER }}
+      TOKEN: ${{ secrets.SECOND_TOKEN_USER }}
 
     steps:
     - uses: actions/checkout@v4
