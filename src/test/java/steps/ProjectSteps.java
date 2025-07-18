@@ -15,13 +15,13 @@ public class ProjectSteps {
         this.homePage = homePage;
     }
 
-    @Step
+    @Step("Create project")
     public ProjectPage createAndOpenProject(String name, String code) {
         projectPage = homePage.createPublicProject(name, code);
         return projectPage;
     }
 
-    @Step
+    @Step("Create Private project")
     public ProjectPage createAndOpenPrivateProject(String name, String code) {
         projectPage = homePage.createPrivateProject(name, code);
         return projectPage;

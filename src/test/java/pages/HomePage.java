@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 
@@ -24,11 +25,11 @@ public class HomePage extends BasePage{
             DROP_DOWN_GROUP_ACCESS = $x("//*[text()='Member access']" +
             "/ancestor::div[2]//*[@data-icon='chevron-down']"),
             SEARCH_FIELD = $x("//input[@aria-label='Search for projects']"),
-            OWNER_GROUP_OPTION = $(byText("Owner group")),
-            UPGRAGE_POPUP = $(byText("Time to upgrade!"));
+            OWNER_GROUP_OPTION = $(byText("Owner group"));
     private final String ACTION_BUTTON = "button[aria-label='Open action menu']",
             CODE_ALREADY_USE_ERROR = "The selected project code is already in use.";
 
+    @Step("Opening the home page")
     @Override
     public HomePage openPage() {
         log.info("Project page opening");
@@ -36,6 +37,7 @@ public class HomePage extends BasePage{
         return this;
     }
 
+    @Step("Verifying the home page is opened")
     @Override
     public HomePage isPageOpened() {
         CREATE_NEW_PROJECT_BUTTON.shouldBe(visible);
@@ -43,6 +45,7 @@ public class HomePage extends BasePage{
         return this;
     }
 
+    @Step("Filling project data: name = '{name}', code = '{code}'")
     private HomePage fillProjectData(String name, String code) {
         log.info("Setting project name: '{}' and code: '{}'", name, code);
         PROJECT_NAME.setValue(name);
@@ -50,6 +53,7 @@ public class HomePage extends BasePage{
         return this;
     }
 
+    @Step("Creating a **public project**: name = '{projectName}', code = '{projectCode}'")
     public ProjectPage createPublicProject(String projectName, String projectCode) {
         log.info("Click on create new project button");
         CREATE_NEW_PROJECT_BUTTON.click();
@@ -61,13 +65,7 @@ public class HomePage extends BasePage{
         return new ProjectPage(projectName, projectCode);
     }
 
-    public HomePage searchProjectByName(String symbolsFromProjectName, String projectName) {
-        log.info("Search project with symbol: {}", symbolsFromProjectName);
-        SEARCH_FIELD.sendKeys(symbolsFromProjectName);
-        $(byText(projectName)).shouldBe(visible);
-        return this;
-    }
-
+    @Step("Creating a **private project**: name = '{projectName}', code = '{projectCode}'")
     public ProjectPage createPrivateProject(String projectName, String projectCode) {
         log.info("Click on create new project button");
         CREATE_NEW_PROJECT_BUTTON.click();
@@ -85,6 +83,16 @@ public class HomePage extends BasePage{
         return new ProjectPage(projectName, projectCode);
     }
 
+    @Step("Searching for project by partial name '{symbolsFromProjectName}', full name = '{projectName}'")
+    public HomePage searchProjectByName(String symbolsFromProjectName, String projectName) {
+        log.info("Search project with symbol: '{}'", symbolsFromProjectName);
+        SEARCH_FIELD.sendKeys(symbolsFromProjectName);
+        $(byText(projectName)).shouldBe(visible);
+        log.info("Project " + projectName + " is found");
+        return this;
+    }
+
+    @Step("Creating a **private project with group access**: name = '{projectName}', code = '{projectCode}'")
     public ProjectPage createPrivateWithGroupProject(String projectName, String projectCode) {
         log.info("Click on create new project button");
         CREATE_NEW_PROJECT_BUTTON.click();
@@ -102,6 +110,7 @@ public class HomePage extends BasePage{
         return new ProjectPage(projectName, projectCode);
     }
 
+    @Step("Trying to create a project with a **duplicate name**: name = '{projectName}', code = '{projectCode}'")
     public HomePage checkCreateSameNameProject(String projectName, String projectCode) {
         log.info("Click on create new project button");
         CREATE_NEW_PROJECT_BUTTON.click();
@@ -114,6 +123,7 @@ public class HomePage extends BasePage{
         return this;
     }
 
+    @Step("Verifying that the project code is **already in use**")
     public HomePage verifyProjectCodeNotAvailable() {
         $(byText(CODE_ALREADY_USE_ERROR))
                 .shouldBe(visible)
@@ -122,11 +132,13 @@ public class HomePage extends BasePage{
         return this;
     }
 
+    @Step("Verifying that project '{projectName}' is deleted")
     public HomePage verifyProjectDeleted(String projectName) {
         $(byText(projectName)).shouldNotBe(visible);
         return this;
     }
 
+    @Step("Opening actions menu for project '{projectName}'")
     public HomePage openProjectActionsMenu(String projectName) {
         log.info("Opening action menu for project '{}'", projectName);
         $(byText(projectName))
@@ -136,6 +148,7 @@ public class HomePage extends BasePage{
         return this;
     }
 
+    @Step("Confirming project deletion")
     public HomePage confirmDeletion() {
         log.info("Click 'Delete project' button for approving");
         APPROVE_DELETE_BUTTON
@@ -144,6 +157,7 @@ public class HomePage extends BasePage{
         return this;
     }
 
+    @Step("Clicking 'Remove' in actions menu for project '{projectName}'")
     public HomePage clickRemoveInActionsMenu(String projectName) {
         log.info("Click 'remove' button in action menu'{}'", projectName);
         REMOVE_BUTTON
@@ -152,6 +166,7 @@ public class HomePage extends BasePage{
         return this;
     }
 
+    @Step("Deleting project '{projectName}'")
     public HomePage deleteProject(String projectName) {
         log.info("Deleting project {}", projectName);
         openProjectActionsMenu(projectName);

@@ -1,0 +1,7 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Full Suite" parallel="tests" thread-count="1">
+    <suite-files>
+        <suite-file path="ui-suite.xml"/>
+        <suite-file path="api-suite.xml"/>
+    </suite-files>
+</suite>

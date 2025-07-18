@@ -1,7 +1,8 @@
 package pages;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import models.TestCase;
+import models.ui.TestCase;
 import org.openqa.selenium.By;
 import wrappers.Picklist;
 import wrappers.Input;
@@ -25,17 +26,20 @@ public class NewTestCaseModal extends BasePage {
     }
 
     @Override
+    @Step("Opening 'Create Test Case' modal for project '{projectCode}'")
     public NewTestCaseModal openPage() {
         open("/case/" + projectCode + "/create");
         return this;
     }
 
     @Override
+    @Step("Verifying 'Create Test Case' modal is opened")
     public NewTestCaseModal isPageOpened() {
         $(byText(CREATE_TEST_CASE)).shouldBe(visible);
         return this;
     }
 
+    @Step("Creating test case: {testCase.title}")
     public ProjectPage createTestCase(TestCase testCase) {
         log.info("Create test case with params: '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}'",
                 testCase.getTitle(), testCase.getStatus(),
@@ -58,6 +62,7 @@ public class NewTestCaseModal extends BasePage {
         return new ProjectPage(projectName, projectCode).isPageOpened();
     }
 
+    @Step("Clicking 'Save' button in test case modal")
     public NewTestCaseModal clickSaveButton() {
         log.info("Click on Save button");
         $(By.id("save-case")).click();

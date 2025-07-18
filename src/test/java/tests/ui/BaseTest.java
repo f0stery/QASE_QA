@@ -1,11 +1,11 @@
-package tests;
+package tests.ui;
 
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.extern.log4j.Log4j2;
-import models.TestCase;
-import models.TestCaseFactory;
+import models.ui.TestCase;
+import models.ui.TestCaseFactory;
 import org.testng.annotations.*;
 import com.codeborne.selenide.Configuration;
 import org.testng.asserts.SoftAssert;
@@ -23,12 +23,10 @@ public class BaseTest {
     LoginPage loginPage;
     HomePage homePage;
     ProjectPage projectPage;
-    SoftAssert softAssert;
     TestCase testCase = TestCaseFactory.getTestCase();
 
     AuthSteps auth;
     ProjectSteps project;
-
     SoftAssert SoftAssert = new SoftAssert();
 
     String email = System.getProperty("email", PropertyReader.getProperty("email"));
@@ -57,13 +55,13 @@ public class BaseTest {
         );
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPages() {
         loginPage = new LoginPage();
         homePage = new HomePage();
+
         auth = new AuthSteps(loginPage, homePage);
         project = new ProjectSteps(homePage);
-        softAssert = new SoftAssert();
 
         auth.login(email, password);
     }
