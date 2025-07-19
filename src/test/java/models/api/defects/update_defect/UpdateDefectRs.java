@@ -1,10 +1,9 @@
-package models.api.create_defect;
+package models.api.defects.update_defect;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CreateDefectRs {
-
+public class UpdateDefectRs {
     @SerializedName("status")
     @Expose
     public Boolean status;

@@ -1,4 +1,4 @@
-package models.api.create_defect;
+package models.api.milestones.create_milestone;
 
 import com.google.gson.annotations.Expose;
 import lombok.Builder;
@@ -6,14 +6,13 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CreateDefectRq {
-
+public class CreateMilestoneRq {
     @Expose
     String title;
     @Expose
-    String actual_result;
+    String description;
     @Expose
-    int severity;
+    String status;
     @Expose
-    int milestoneId;
+    int due_date;
 }

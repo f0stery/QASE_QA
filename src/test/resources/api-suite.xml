@@ -1,9 +1,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="API Suite" parallel="false">
-    <test name="API Tests">
+    <test name="Tests with projects">
         <classes>
-            <class name="tests.api.DefectAPITest"/>
             <class name="tests.api.ProjectAPITest"/>
+        </classes>
+    </test>
+    <test name="Tests with Defects">
+        <classes>
+            <class name="tests.api.DefectAPITest"></class>
+        </classes>
+    </test>
+    <test name="Tests with Milistones">
+        <classes>
+            <class name="tests.api.MilestonesAPITest"></class>
         </classes>
     </test>
 </suite>

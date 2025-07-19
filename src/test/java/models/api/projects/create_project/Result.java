@@ -1,4 +1,4 @@
-package models.api.create_project;
+package models.api.projects.create_project;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

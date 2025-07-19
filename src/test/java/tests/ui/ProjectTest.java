@@ -2,7 +2,7 @@ package tests.ui;
 
 import adapters.ProjectAPI;
 import io.qameta.allure.*;
-import models.api.create_project.CreateProjectRq;
+import models.api.projects.create_project.CreateProjectRq;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
