@@ -2,7 +2,7 @@ package tests.ui;
 
 import adapters.ProjectAPI;
 import io.qameta.allure.*;
-import models.api.create_project.CreateProjectRq;
+import models.api.projects.create_project.CreateProjectRq;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,7 +17,6 @@ public class ProjectTest extends BaseTest {
 
     private final String projectName = generateProjectName("QASE");
     private final String projectCode = generateProjectCode(projectName);
-
 
     @BeforeMethod
     public void createProject() {
@@ -83,6 +82,7 @@ public class ProjectTest extends BaseTest {
                 .isPageOpened();
         SoftAssert.assertTrue(projectPage.verifyCreateSuite("Smoke77"),
                         "Suite not create");
+        SoftAssert.assertAll();
     }
 
     @AfterMethod

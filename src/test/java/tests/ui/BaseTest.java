@@ -60,7 +60,7 @@ public class BaseTest {
         loginPage = new LoginPage();
         homePage = new HomePage();
 
-        auth = new AuthSteps(loginPage, homePage);
+        auth = new AuthSteps(loginPage);
         project = new ProjectSteps(homePage);
 
         auth.login(email, password);

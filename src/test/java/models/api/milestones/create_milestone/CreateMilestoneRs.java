@@ -1,9 +1,11 @@
-package models.api.create_project;
+package models.api.milestones.create_milestone;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CreateProjectRs {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CreateMilestoneRs {
 
     @SerializedName("status")
     @Expose
@@ -11,4 +13,5 @@ public class CreateProjectRs {
     @SerializedName("result")
     @Expose
     public Result result;
+
 }

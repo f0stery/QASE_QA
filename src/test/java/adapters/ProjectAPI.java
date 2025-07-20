@@ -1,63 +1,32 @@
 package adapters;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import io.restassured.http.ContentType;
-import io.restassured.specification.RequestSpecification;
-import models.api.create_defect.CreateDefectRq;
-import models.api.create_defect.CreateDefectRs;
-import models.api.create_project.CreateProjectRq;
-import models.api.create_project.CreateProjectRs;
-import tests.ui.PropertyReader;
+import models.api.projects.create_project.CreateProjectRq;
+import models.api.projects.create_project.CreateProjectRs;
+import models.api.projects.get_all_projects.GetProjectsRs;
 
-import static io.restassured.RestAssured.given;
 
-public class ProjectAPI {
-
-    static String token = System.getProperty("token", PropertyReader.getProperty("token"));
-    static Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-    static RequestSpecification spec =
-            given()
-            .log().all()
-            .contentType(ContentType.JSON)
-            .header("Token", token);
+public class ProjectAPI extends BaseAPI {
 
     public static CreateProjectRs createProject(CreateProjectRq projectRq) {
-        return
-                spec
-                .body(gson.toJson(projectRq))
-                .when()
-                .post("https://api.qase.io/v1/project")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .extract()
-                .as(CreateProjectRs.class);
+        return post(projectRq, projectAPIUrl, CreateProjectRs.class);
     }
 
-    public static CreateDefectRs createDefect(CreateDefectRq defectRq, String projectCode) {
+    public static GetProjectsRs getAllProjects() {
         return
-        given()
-                .log().all()
-                .contentType(ContentType.JSON)
-                .header("Token", token)
-                .body(defectRq)
+                spec
                 .when()
-                .post("https://api.qase.io/v1/defect/" + projectCode)
+                .get(baseAPIUrl + projectAPIUrl + GET_VALUES)
                 .then()
                 .log().all()
                 .statusCode(200)
                 .extract()
-                .as(CreateDefectRs.class);
+                .as(GetProjectsRs.class);
     }
 
     public static void deleteProject(String projectCode) {
-        given()
-                .log().all()
-                .contentType(ContentType.JSON)
-                .header("Token", token)
+        spec
                 .when()
-                .delete("https://api.qase.io/v1/project/" + projectCode)
+                .delete(baseAPIUrl + projectAPIUrl + projectCode)
                 .then()
                 .log().all()
                 .statusCode(200);

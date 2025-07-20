@@ -7,7 +7,7 @@ import pages.LoginPage;
 public class AuthSteps {
     private final LoginPage loginPage;
 
-    public AuthSteps(LoginPage loginPage, HomePage homePage) {
+    public AuthSteps(LoginPage loginPage) {
         this.loginPage = loginPage;
     }
 
