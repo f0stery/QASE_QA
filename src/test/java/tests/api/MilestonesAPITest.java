@@ -24,7 +24,6 @@ public class MilestonesAPITest extends BaseAPITest {
 
         softAssert.assertTrue(milestonesRs.response.status, "Milestone creation should return true status");
         softAssert.assertNotNull(milestonesRs.response.result.id, "Milestone ID should not be null");
-
         softAssert.assertAll();
     }
 
@@ -45,7 +44,6 @@ public class MilestonesAPITest extends BaseAPITest {
         softAssert.assertEquals(result.title, milestonesRs.title);
         softAssert.assertEquals(result.description, milestonesRs.description);
         softAssert.assertEquals(result.status.toLowerCase(), "active");
-
         softAssert.assertAll();
     }
 }

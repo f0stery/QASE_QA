@@ -8,19 +8,20 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Result {
+
     @SerializedName("id")
     @Expose
     public Integer id;
     @SerializedName("title")
     @Expose
     public String title;
-    @SerializedName("actualResult")
+    @SerializedName("actual_result")
     @Expose
     public String actual_result;
     @SerializedName("status")
     @Expose
     public String status;
-    @SerializedName("milestone_id")
+    @SerializedName("milestoneId")
     @Expose
     public Integer milestoneId;
     @SerializedName("severity")

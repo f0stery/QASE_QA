@@ -8,6 +8,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Result {
+
     @SerializedName("total")
     @Expose
     public Integer total;

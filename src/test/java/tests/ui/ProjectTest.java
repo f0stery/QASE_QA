@@ -18,7 +18,6 @@ public class ProjectTest extends BaseTest {
     private final String projectName = generateProjectName("QASE");
     private final String projectCode = generateProjectCode(projectName);
 
-
     @BeforeMethod
     public void createProject() {
         CreateProjectRq projectRq = CreateProjectRq.builder()
@@ -83,6 +82,7 @@ public class ProjectTest extends BaseTest {
                 .isPageOpened();
         SoftAssert.assertTrue(projectPage.verifyCreateSuite("Smoke77"),
                         "Suite not create");
+        SoftAssert.assertAll();
     }
 
     @AfterMethod

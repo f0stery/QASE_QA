@@ -22,7 +22,7 @@ public class TestCase {
     @Builder.Default
     private String layer = "Not set";
     @Builder.Default
-    private String flaky = "";
+    private String flaky = "No";
     @Builder.Default
     private String milestone = "Not set";
     @Builder.Default

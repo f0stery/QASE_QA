@@ -5,6 +5,7 @@ import com.github.javafaker.Faker;
 public class TestCaseFactory {
 
     public static TestCase getTestCase() {
+
         Faker faker = new Faker();
 
         String titleTestcase = faker.options().option(

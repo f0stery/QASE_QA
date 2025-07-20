@@ -96,5 +96,4 @@ public class TestDataGenerator {
 
         return new GenerateMilestonesData(response, title, description, status, due_data);
     }
-
 }

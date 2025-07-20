@@ -8,6 +8,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Entity {
+
     @SerializedName("id")
     @Expose
     public Integer id;
@@ -16,11 +17,11 @@ public class Entity {
     public String title;
     @SerializedName("actual_result")
     @Expose
-    public String actualResult;
+    public String actual_result;
     @SerializedName("status")
     @Expose
     public String status;
-    @SerializedName("milestone_id")
+    @SerializedName("milestoneId")
     @Expose
     public Object milestoneId;
     @SerializedName("severity")

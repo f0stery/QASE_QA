@@ -6,9 +6,6 @@ import models.api.projects.create_project.CreateProjectRs;
 import org.testng.annotations.AfterMethod;
 import org.testng.asserts.SoftAssert;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
 public abstract class BaseAPITest {
 
     protected SoftAssert softAssert;
@@ -34,8 +31,10 @@ public abstract class BaseAPITest {
 
         CreateProjectRs projectRs = ProjectAPI.createProject(projectRq);
 
-        assertTrue(projectRs.status, "Project must be create");
-        assertEquals(projectRs.result.code, code, "Check Project Code");
+        softAssert.assertTrue(projectRs.status, "Project must be create");
+        softAssert.assertEquals(projectRs.result.code, code, "Check Project Code");
+
+        softAssert.assertAll();
     }
 
     @AfterMethod(alwaysRun = true)
@@ -45,4 +44,3 @@ public abstract class BaseAPITest {
         }
     }
 }
-

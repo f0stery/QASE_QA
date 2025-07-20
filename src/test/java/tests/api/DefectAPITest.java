@@ -36,7 +36,6 @@ public class DefectAPITest extends BaseAPITest {
         softAssert.assertTrue(defectRs.response.status, "Status should be true");
         softAssert.assertTrue(defectRs.response.result.id > 0, "Defect ID should be greater than 0");
         softAssert.assertNotNull(defectRs.response.result.id, "Defect ID should not be null");
-
         softAssert.assertAll();
     }
 
@@ -58,7 +57,6 @@ public class DefectAPITest extends BaseAPITest {
         softAssert.assertEquals(result.title, defectFirstRs.title);
         softAssert.assertEquals(result.actual_result, defectFirstRs.actualResult);
         softAssert.assertEquals(result.severity.toLowerCase(), getSeverityLabel(defectFirstRs.severity));
-
         softAssert.assertAll();
     }
 
@@ -87,7 +85,6 @@ public class DefectAPITest extends BaseAPITest {
 
         softAssert.assertTrue(responseTitles.containsAll(createdTitles), "All created defect titles should " +
                 "be in the response");
-
         softAssert.assertAll();
     }
 
@@ -122,7 +119,6 @@ public class DefectAPITest extends BaseAPITest {
         softAssert.assertEquals(result.actual_result, updatedActualResult, "Actual result not updated");
         softAssert.assertEquals(result.severity.toLowerCase(), getSeverityLabel(updatedSeverity),
                 "Severity not updated");
-
         softAssert.assertAll();
     }
 
@@ -144,7 +140,6 @@ public class DefectAPITest extends BaseAPITest {
         softAssert.assertFalse(response.jsonPath().getBoolean("status"), "Status should be false after " +
                 "deletion");
         softAssert.assertEquals(response.jsonPath().getString("errorMessage"), "Defect not found");
-
         softAssert.assertAll();
     }
 }

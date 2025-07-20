@@ -1,6 +1,8 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import models.ui.TestCase;
 import org.openqa.selenium.By;
@@ -11,6 +13,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
+@AllArgsConstructor
 @Log4j2
 public class NewTestCaseModal extends BasePage {
 
@@ -19,11 +22,6 @@ public class NewTestCaseModal extends BasePage {
             projectCode,
             CREATE_TEST_CASE = "Create test case";
 
-
-    public NewTestCaseModal(String projectName, String projectCode) {
-        this.projectName = projectName;
-        this.projectCode = projectCode;
-    }
 
     @Override
     @Step("Opening 'Create Test Case' modal for project '{projectCode}'")
