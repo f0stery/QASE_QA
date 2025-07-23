@@ -1,4 +1,4 @@
-package models.api.defects.getSpecificDefect;
+package models.api.defects.get_specific_defect;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.gson.annotations.Expose;

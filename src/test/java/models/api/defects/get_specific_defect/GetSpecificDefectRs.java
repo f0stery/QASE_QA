@@ -1,9 +1,9 @@
-package models.api.defects.update_defect;
+package models.api.defects.get_specific_defect;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UpdateDefectRs {
+public class GetSpecificDefectRs {
 
     @SerializedName("status")
     @Expose
