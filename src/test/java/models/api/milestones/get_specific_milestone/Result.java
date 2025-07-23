@@ -1,4 +1,4 @@
-package models.api.milestones.GetSpecificMilestone;
+package models.api.milestones.get_specific_milestone;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.gson.annotations.Expose;
