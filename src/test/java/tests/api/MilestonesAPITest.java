@@ -1,10 +1,7 @@
 package tests.api;
 
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import models.api.GenerateMilestonesData;
 import models.api.milestones.get_all_milestones.GetAllMilestonesRs;
@@ -23,6 +20,8 @@ import static adapters.MilestonesAPI.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+@Epic("Milestones API")
+@Feature("Milestone CRUD Operations")
 public class MilestonesAPITest extends BaseAPITest {
 
     private final String PROJECT_NAME = "SauseDemo";
