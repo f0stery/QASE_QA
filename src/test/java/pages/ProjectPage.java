@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -22,13 +23,12 @@ public class ProjectPage extends BasePage {
             PROJECT_ACCESS_TYPE = "//div[contains(., '%s')]/ancestor::label[@data-selected='true']";
 
     private final SelenideElement
-            CREATE_NEW_TEST_BUTTON = $(byText("New test")),
+            CREATE_NEW_TEST_BUTTON = $(byText("Manual test")),
             TITLE_REPOSITORY = $(byText("repository")),
             SETTINGS_BUTTON = $(byText("Settings")),
-            ADD_SUITE_BUTTON = $(byText("Add suite")),
+            ADD_SUITE_BUTTON = $(byText("Create new suite")),
             SUITE_NAME_FIELD = $(By.id("title")),
-            SUITE_DESCRIPTION_FIELD = $x("//div[@aria-label='Description']" +
-                    "//div[@contenteditable='true']"),
+            SUITE_DESCRIPTION_FIELD = $(By.id("description")),
             SUITE_PRECONDITION_FIELD = $x("//div[@aria-label='Preconditions']" +
                     "//div[@contenteditable='true']"),
             PARENT_SUITE_LIST = $(byText("Project root")),
@@ -113,10 +113,14 @@ public class ProjectPage extends BasePage {
     @Step("Edit suite: name='{suiteName}', description='{description}', " +
             "precondition='{precondition}', parent='{parentSuite}'")
     public ProjectPage editSuite(String suiteName, String description, String precondition, String parentSuite) {
-        log.info("Edit suite with params: '{}', '{}', '{}', '{}'", suiteName, description, precondition, parentSuite);
-        SUITE_NAME_FIELD.setValue(suiteName);
+        log.info("Edit suite with params: '{}', '{}', '{}', '{}'", suiteName, description,
+                precondition, parentSuite);
         SUITE_DESCRIPTION_FIELD.setValue(description);
         SUITE_PRECONDITION_FIELD.setValue(precondition);
+        SUITE_NAME_FIELD.click();
+        SUITE_NAME_FIELD.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        SUITE_NAME_FIELD.sendKeys(Keys.BACK_SPACE);
+        SUITE_NAME_FIELD.setValue(suiteName);
         PARENT_SUITE_LIST.click();
         $(byText(parentSuite)).click();
         SAVE_SUITE_BUTTON.click();

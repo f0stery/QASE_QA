@@ -1,9 +1,11 @@
-package models.api.defects.getSpecificDefect;
+package models.api.milestones.get_specific_milestone;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetSpecificDefectRs {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class GetSpecifiMilestoneRs {
 
     @SerializedName("status")
     @Expose

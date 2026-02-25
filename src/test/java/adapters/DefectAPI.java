@@ -3,7 +3,7 @@ package adapters;
 import io.restassured.response.Response;
 import models.api.defects.create_defect.CreateDefectRq;
 import models.api.defects.create_defect.CreateDefectRs;
-import models.api.defects.getSpecificDefect.GetSpecificDefectRs;
+import models.api.defects.get_specific_defect.GetSpecificDefectRs;
 import models.api.defects.get_all_defects.GetAllDefectRs;
 import models.api.defects.update_defect.UpdateDefectRq;
 import models.api.defects.update_defect.UpdateDefectRs;
