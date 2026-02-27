@@ -2,7 +2,6 @@ package pages;
 
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import models.ui.TestCase;
 import org.openqa.selenium.By;

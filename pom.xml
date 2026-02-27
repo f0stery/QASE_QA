@@ -18,7 +18,7 @@
         <log4j.version>2.24.3</log4j.version>
         <jackson.version>2.15.0</jackson.version>
         <testng.version>7.11.0</testng.version>
-        <selenide.version>7.9.3</selenide.version>
+        <selenide.version>7.13.0</selenide.version>
         <rest-assured.version>5.5.5</rest-assured.version>
     </properties>
 

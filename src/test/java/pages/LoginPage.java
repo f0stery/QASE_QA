@@ -1,6 +1,5 @@
 package pages;
 
-import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import static com.codeborne.selenide.Condition.visible;
@@ -8,9 +7,6 @@ import static com.codeborne.selenide.Selenide.*;
 
 @Log4j2
 public class LoginPage extends BasePage{
-
-    private final SelenideElement EMAIL_CSS = $("[name='email']"),
-            PASSWORD_CSS = $("[name='password']");
 
     @Step("Opening the login page")
     @Override
@@ -28,12 +24,16 @@ public class LoginPage extends BasePage{
         return this;
     }
 
-    @Step("Login in as user: {email}")
+    @Step("Login to application")
     public HomePage login(String email, String password) {
-        log.info("Enter value email: '{}'", email);
-        EMAIL_CSS.setValue(email);
-        log.info("Enter value password: '{}' and submit log in", password);
-        PASSWORD_CSS.setValue(password).submit();
-        return new HomePage();
+        log.info("Entering credentials and submitting login form");
+        try {
+            executeLogin(email, password);
+            return new HomePage();
+        } catch (Exception e) {
+            log.error("Login failed: {}", e.getMessage());
+            throw new RuntimeException("Login failed", e);
+        }
+
     }
 }

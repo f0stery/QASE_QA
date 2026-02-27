@@ -88,7 +88,7 @@ public class HomePage extends BasePage{
         log.info("Search project with symbol: '{}'", symbolsFromProjectName);
         SEARCH_FIELD.sendKeys(symbolsFromProjectName);
         $(byText(projectName)).shouldBe(visible);
-        log.info("Project " + projectName + " is found");
+        log.info("Project {} is found", projectName);
         return this;
     }
 
