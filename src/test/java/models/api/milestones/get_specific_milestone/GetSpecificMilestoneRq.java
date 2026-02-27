@@ -1,4 +1,4 @@
-package models.api.milestones.GetSpecificMilestone;
+package models.api.milestones.get_specific_milestone;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

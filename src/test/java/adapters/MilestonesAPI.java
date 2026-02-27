@@ -1,12 +1,13 @@
 package adapters;
 
-import models.api.defects.getSpecificDefect.GetSpecificDefectRs;
+import io.restassured.response.Response;
 import models.api.defects.get_all_defects.GetAllDefectRs;
-import models.api.defects.update_defect.UpdateDefectRq;
-import models.api.defects.update_defect.UpdateDefectRs;
-import models.api.milestones.GetSpecificMilestone.GetSpecifiMilestoneRs;
+import models.api.milestones.get_all_milestones.GetAllMilestonesRs;
+import models.api.milestones.get_specific_milestone.GetSpecifiMilestoneRs;
 import models.api.milestones.create_milestone.CreateMilestoneRq;
 import models.api.milestones.create_milestone.CreateMilestoneRs;
+import models.api.milestones.update_milestone.UpdateMilestoneRq;
+import models.api.milestones.update_milestone.UpdateMilestoneRs;
 
 public class MilestonesAPI extends BaseAPI {
 
@@ -17,15 +18,21 @@ public class MilestonesAPI extends BaseAPI {
         return get(milestonesAPIUrl + projectCode + "/" + milestoneId, GetSpecifiMilestoneRs.class);
     }
 
-    public static GetAllDefectRs getAllDefects(String projectCode) {
-        return get(defectAPIUrl + projectCode + "/" + GET_VALUES, GetAllDefectRs.class);
+    public static GetAllMilestonesRs getAllMilestones(String projectCode) {
+        return get(milestonesAPIUrl + projectCode + "/" + GET_VALUES, GetAllMilestonesRs.class);
     }
 
-    public static UpdateDefectRs updateDefect(UpdateDefectRq defectRq, String projectCode, int defectId) {
-        return patch(defectRq, defectAPIUrl + projectCode + "/" + defectId, UpdateDefectRs.class);
+    public static UpdateMilestoneRs updateMilestones(UpdateMilestoneRq milestoneRq, String projectCode, int milestoneId) {
+        return patch(milestoneRq, milestonesAPIUrl + projectCode + "/" + milestoneId, UpdateMilestoneRs.class);
     }
 
-    public static void deleteDefect(String projectCode, int defectId) {
-        delete(defectAPIUrl + projectCode + "/" + defectId);
+    public static void deleteMilestone(String projectCode, int milestoneId) {
+        delete(milestonesAPIUrl + projectCode + "/" + milestoneId);
+    }
+
+    public static Response getMilestoneRaw(String projectCode, int milestoneId) {
+        return spec
+                .when()
+                .get(baseAPIUrl + milestonesAPIUrl + projectCode + "/" + milestoneId);
     }
 }

@@ -1,9 +1,9 @@
-package models.api.defects.update_defect;
+package models.api.milestones.get_all_milestones;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UpdateDefectRs {
+public class GetAllMilestonesRs {
 
     @SerializedName("status")
     @Expose
