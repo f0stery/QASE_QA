@@ -27,12 +27,16 @@ public class BaseTest {
 
     AuthSteps auth;
     ProjectSteps project;
-    SoftAssert SoftAssert = new SoftAssert();
+    private static final ThreadLocal<SoftAssert> softAssert = ThreadLocal.withInitial(SoftAssert::new);
+
+    protected SoftAssert sa() {
+        return softAssert.get();
+    }
 
     String email = System.getProperty("email", PropertyReader.getProperty("email"));
     String password = System.getProperty("password", PropertyReader.getProperty("password"));
 
-    @BeforeClass
+    @BeforeTest
     @Parameters("browser")
     public void initDriver(@Optional("chrome") String browser) {
 
@@ -55,7 +59,7 @@ public class BaseTest {
         );
     }
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void initPages() {
         loginPage = new LoginPage();
         homePage = new HomePage();
@@ -66,7 +70,7 @@ public class BaseTest {
         auth.login(email, password);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterTest(alwaysRun = true)
     public void tearDown() {
         if (WebDriverRunner.hasWebDriverStarted()) {
             WebDriverRunner.closeWebDriver();
