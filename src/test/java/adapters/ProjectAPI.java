@@ -13,7 +13,7 @@ public class ProjectAPI extends BaseAPI {
 
     public static GetProjectsRs getAllProjects() {
         return
-                spec
+                getSpec()
                 .when()
                 .get(baseAPIUrl + projectAPIUrl + GET_VALUES)
                 .then()
@@ -24,7 +24,7 @@ public class ProjectAPI extends BaseAPI {
     }
 
     public static void deleteProject(String projectCode) {
-        spec
+        getSpec()
                 .when()
                 .delete(baseAPIUrl + projectAPIUrl + projectCode)
                 .then()
