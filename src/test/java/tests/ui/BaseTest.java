@@ -75,5 +75,11 @@ public class BaseTest {
         if (WebDriverRunner.hasWebDriverStarted()) {
             WebDriverRunner.closeWebDriver();
         }
+        softAssert.remove();
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void clearSoftAssert() {
+        softAssert.remove();
     }
 }
