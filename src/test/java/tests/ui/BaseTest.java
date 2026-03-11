@@ -33,9 +33,6 @@ public class BaseTest {
         return softAssert.get();
     }
 
-    String email = System.getProperty("email", PropertyReader.getProperty("email"));
-    String password = System.getProperty("password", PropertyReader.getProperty("password"));
-
     @BeforeTest
     @Parameters("browser")
     public void initDriver(@Optional("chrome") String browser) {
@@ -68,7 +65,7 @@ public class BaseTest {
         auth = new AuthSteps(loginPage);
         project = new ProjectSteps(homePage);
 
-        auth.login(email, password);
+        auth.login();
     }
 
     @AfterTest(alwaysRun = true)

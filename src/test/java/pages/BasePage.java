@@ -1,8 +1,8 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public abstract class BasePage {
 
@@ -17,5 +17,9 @@ public abstract class BasePage {
     public void executeLogin(String email, String password) {
         EMAIL_CSS.setValue(email);
         PASSWORD_CSS.setValue(password).submit();
+    }
+
+    public void disableBeforeUnloadAlert() {
+        executeJavaScript("window.onbeforeunload = null;");
     }
 }

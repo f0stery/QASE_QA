@@ -26,6 +26,7 @@ public class NewTestCaseModal extends BasePage {
     @Step("Opening 'Create Test Case' modal for project '{projectCode}'")
     public NewTestCaseModal openPage() {
         open("/case/" + projectCode + "/create");
+        disableBeforeUnloadAlert();
         return this;
     }
 
@@ -54,7 +55,6 @@ public class NewTestCaseModal extends BasePage {
         new Picklist("Milestone").select(testCase.getMilestone());
         new Picklist("Behavior").select(testCase.getBehavior());
         new Picklist("Automation status").select(testCase.getAutomationStatus());
-
         clickSaveButton();
         return new ProjectPage(projectName, projectCode).isPageOpened();
     }
