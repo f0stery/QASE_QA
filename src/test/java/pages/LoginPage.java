@@ -13,6 +13,7 @@ public class LoginPage extends BasePage{
     public LoginPage openPage() {
         log.info("Login page opening");
         open("/login");
+        disableBeforeUnloadAlert();
         return this;
     }
 
