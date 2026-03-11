@@ -40,7 +40,7 @@ public class ProjectTest extends BaseTest {
                 projectPage.openPage().isPageOpened()
                         .openNewTestCaseModal()
                         .createTestCase(testCase);
-        SoftAssert.assertTrue(projectPage.verifyTestCaseExists(testCase.getTitle()), "Test case" +
+        sa().assertTrue(projectPage.verifyTestCaseExists(testCase.getTitle()), "Test case" +
                 testCase.getTitle() + "not create");
     }
 
@@ -55,7 +55,7 @@ public class ProjectTest extends BaseTest {
                 .isPageOpened()
                 .createSuite("Smoke", "Check authorization function", "nothing",
                         "Project root");
-        SoftAssert.assertTrue(projectPage.verifyCreateSuite("Smoke"),
+        sa().assertTrue(projectPage.verifyCreateSuite("Smoke"),
                 "Suite is not create");
     }
 
@@ -69,7 +69,7 @@ public class ProjectTest extends BaseTest {
                 .isPageOpened()
                 .createSuite("Smoke", "Check authorization function", "nothing",
                         "Project root");
-        SoftAssert.assertTrue(projectPage.verifyCreateSuite("Smoke"),
+        sa().assertTrue(projectPage.verifyCreateSuite("Smoke"),
                 "Suite not create");
         projectPage
                 .openNewTestCaseModal()
@@ -80,9 +80,9 @@ public class ProjectTest extends BaseTest {
                 .editSuite("Smoke77", "Check new auth", "77", "Project root")
                 .openPage()
                 .isPageOpened();
-        SoftAssert.assertTrue(projectPage.verifyCreateSuite("Smoke77"),
+        sa().assertTrue(projectPage.verifyCreateSuite("Smoke77"),
                         "Suite not create");
-        SoftAssert.assertAll();
+        sa().assertAll();
     }
 
     @AfterMethod

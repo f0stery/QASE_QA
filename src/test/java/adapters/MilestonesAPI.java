@@ -31,7 +31,7 @@ public class MilestonesAPI extends BaseAPI {
     }
 
     public static Response getMilestoneRaw(String projectCode, int milestoneId) {
-        return spec
+        return getSpec()
                 .when()
                 .get(baseAPIUrl + milestonesAPIUrl + projectCode + "/" + milestoneId);
     }

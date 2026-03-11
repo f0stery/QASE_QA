@@ -31,7 +31,7 @@ public class DefectAPI extends BaseAPI {
     }
 
     public static Response getDefectRaw(String projectCode, int defectId) {
-        return spec
+        return getSpec()
                 .when()
                 .get(baseAPIUrl + defectAPIUrl + projectCode + "/" + defectId);
     }
