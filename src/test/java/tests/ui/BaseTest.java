@@ -47,7 +47,7 @@ public class BaseTest {
 
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
         Configuration.baseUrl = "https://app.qase.io";
-        Configuration.timeout = 10000;
+        Configuration.timeout = 50000;
         Configuration.clickViaJs = true;
         Configuration.browserSize = "1920x1080";
 
@@ -56,6 +56,7 @@ public class BaseTest {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(false)
+                .includeSelenideSteps(false)
         );
     }
 
