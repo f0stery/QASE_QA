@@ -1,10 +1,10 @@
-# 🏗️ Test Automation Framework for [Qase.io](https://app.qase.io/)
+# Test Automation Framework for [Qase.io](https://app.qase.io/)
 
 
 # [![Tests](https://github.com/f0stery/QASE_QA/actions/workflows/QASE.yml/badge.svg)](https://github.com/f0stery/QASE_QA/actions/workflows/QASE.yml)
 
 ## Project Goal
-A demonstration project for test automation of key scenarios for the Qase.io web application using modern Java tools. The project is structured for easy maintenance and scalability.
+Project for test automation of key scenarios for the Qase.io web application using modern Java tools. The project is structured for easy maintenance and scalability.
 
 ## Technology Stack
 | Category              | Technologies Used                     |
@@ -21,35 +21,43 @@ A demonstration project for test automation of key scenarios for the Qase.io web
 *   **Data-Driven Approach:** Test data is externalized into property files, separating it from test logic for better flexibility.
 *   **Logging & Reporting:** Detailed logging with Log4j2. Comprehensive Allure reports with attachments (screenshots of failures, request logs) are generated after each test run.
 
+## Sample report Allure
+
+![Allure overview page](images/allure-overview.png)
+*Allure main report page with overall metrics*
+
+![Allure test details page](images/allure-overview.png)
+*Allure test details page*
+
 ##  Project Structure
 
 ```
 QASE_QA/
 ├── .github/
-│   └── workflows/                          # Конфигурация GitHub Actions для CI/CD
+│   └── workflows/                          D
 ├── src/
 │   ├── test/
 │   │   └── java/
 │   │       └── [your-base-package]/
-│   │           ├── adapters/               # Слой для взаимодействия с API (клиенты, адаптеры)
-│   │           ├── models/                 # POJO-классы для данных (тест-кейсы, дефекты и т.д.)
-│   │           ├── pages/                  # Page Object'ы для UI страниц
-│   │           ├── steps/                  # Бизнес-шаги (логин, создание проекта и т.д.)
-│   │           ├── tests/                  # Тестовые классы, разбитые по логике (api, ui)
+│   │           ├── adapters/              
+│   │           ├── models/                 
+│   │           ├── pages/                  
+│   │           ├── steps/                  
+│   │           ├── tests/                 
 │   │           │   └── api/
 │   │           │   └── ui/
-│   │           ├── utils/                  # Утилиты (парсеры, хелперы, PropertyReader)
-│   │           └── wrappers/               # Обёртки над Selenide-элементами (кастомные компоненты)
+│   │           ├── utils/                  
+│   │           └── wrappers/               
 │   │
-│   └── resources/                          # Ресурсы для тестов
-│           ├── allure.properties           # Настройки Allure Reports
-│           ├── api-suite.xml               # TestNG сьют для API тестов
-│           ├── config.properties           # Конфигурационные данные (URL, логины)
-│           ├── full-suite.xml              # TestNG сьют для всех тестов
-│           ├── log4j2-test.yaml            # Конфигурация логирования Log4j2
-│           └── ui-suite.xml                # TestNG сьют для UI тестов
-├── pom.xml                                 # Файл сборки Maven и управления зависимостями
-└── README.md                               # Документация проекта
+│   └── resources/                          
+│           ├── allure.properties           
+│           ├── api-suite.xml              
+│           ├── config.properties          
+│           ├── full-suite.xml              
+│           ├── log4j2-test.yaml            
+│           └── ui-suite.xml                
+├── pom.xml                                 
+└── README.md                               
 ```
 ##  Getting Started
 
