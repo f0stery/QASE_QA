@@ -45,6 +45,7 @@ public class ProjectPage extends BasePage {
     public ProjectPage openPage() {
         log.info("Opening project page");
         open("/project/" + projectCode);
+        disableBeforeUnloadAlert();
         return this;
     }
 

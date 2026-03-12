@@ -33,9 +33,6 @@ public class BaseTest {
         return softAssert.get();
     }
 
-    String email = System.getProperty("email", PropertyReader.getProperty("email"));
-    String password = System.getProperty("password", PropertyReader.getProperty("password"));
-
     @BeforeTest
     @Parameters("browser")
     public void initDriver(@Optional("chrome") String browser) {
@@ -47,7 +44,7 @@ public class BaseTest {
 
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
         Configuration.baseUrl = "https://app.qase.io";
-        Configuration.timeout = 10000;
+        Configuration.timeout = 50000;
         Configuration.clickViaJs = true;
         Configuration.browserSize = "1920x1080";
 
@@ -56,6 +53,7 @@ public class BaseTest {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(false)
+                .includeSelenideSteps(false)
         );
     }
 
@@ -67,7 +65,7 @@ public class BaseTest {
         auth = new AuthSteps(loginPage);
         project = new ProjectSteps(homePage);
 
-        auth.login(email, password);
+        auth.login();
     }
 
     @AfterTest(alwaysRun = true)

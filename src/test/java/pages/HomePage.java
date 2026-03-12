@@ -34,6 +34,7 @@ public class HomePage extends BasePage{
     public HomePage openPage() {
         log.info("Project page opening");
         open("/projects");
+        disableBeforeUnloadAlert();
         return this;
     }
 

@@ -13,6 +13,7 @@ public class LoginPage extends BasePage{
     public LoginPage openPage() {
         log.info("Login page opening");
         open("/login");
+        disableBeforeUnloadAlert();
         return this;
     }
 
@@ -24,7 +25,6 @@ public class LoginPage extends BasePage{
         return this;
     }
 
-    @Step("Login to application")
     public HomePage login(String email, String password) {
         log.info("Entering credentials and submitting login form");
         try {
@@ -34,6 +34,5 @@ public class LoginPage extends BasePage{
             log.error("Login failed: {}", e.getMessage());
             throw new RuntimeException("Login failed", e);
         }
-
     }
 }
