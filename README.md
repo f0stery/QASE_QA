@@ -3,6 +3,7 @@
 
 # [![Tests](https://github.com/f0stery/QASE_QA/actions/workflows/QASE.yml/badge.svg)](https://github.com/f0stery/QASE_QA/actions/workflows/QASE.yml)
 
+
 ## Project Goal
 Project for test automation of key scenarios for the Qase.io web application using modern Java tools. The project is structured for easy maintenance and scalability.
 
@@ -26,8 +27,12 @@ Project for test automation of key scenarios for the Qase.io web application usi
 ![Allure overview page](images/allure-overview.png)
 *Allure main report page with overall metrics*
 
-![Allure test details page](images/allure-overview.png)
+---
+
+![Allure test details page](images/allure-test-details.png)
 *Allure test details page*
+
+---
 
 ##  Project Structure
 
@@ -57,8 +62,10 @@ QASE_QA/
 │           ├── log4j2-test.yaml            
 │           └── ui-suite.xml                
 ├── pom.xml                                 
-└── README.md                               
+└── README.md                          
 ```
+---
+
 ##  Getting Started
 
 ### Prerequisites
@@ -83,10 +90,11 @@ QASE_QA/
     ```bash
     mvn allure:serve
    
+---   
+
 # Test Coverage
 
 ## 🖥 **UI Tests**
-
 ### 1. **Projects Management**
 - Create new project
 - Search project by name/filters
@@ -144,6 +152,8 @@ QASE_QA/
 - `POST` — Create a new defect
 - `DELETE` — Delete defect
 - `UPDATE` — Update defect
+
+
 
 ### **Milestones Management**
 - `GET` — Get all milestones
